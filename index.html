@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>Task3</title>
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .main-container {
+    padding: 0 15px;
+  }
+
+  .form-container {
+    width: 400px;
+    margin: 50px auto;
+    box-shadow: 0 0px 10px 0 #cecece;
+  }
+
+  .table-container {
+    width: 800px;
+    margin: 50px auto;
+  }
+
+  .form {
+    padding: 20px 50px;
+  }
+
+  input[type=text],
+  input[type=number],
+  input[type=email] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    border: 1px solid #cecece;
+  }
+
+  input[type='button'] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  }
+
+  input[type='button']:hover {
+    opacity: 0.8;
+  }
+
+  input[type='button'].btnDelete {
+    background: #d32f2f;
+  }
+
+  input[type='button'].btnDelete:hover {
+    background-color: #e53935;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+
+  table,
+  th,
+  td {
+    border: none;
+  }
+
+  thead {
+    border-top: 1px solid #d0d0d0;
+    border-bottom: 1px solid #d0d0d0;
+  }
+
+  table>tbody>tr:nth-child(odd) {
+    background-color: #f2f2f2;
+  }
+
+  td,
+  th {
+    padding: 15px 5px;
+    text-align: left;
+    vertical-align: middle;
+  }
+
+  td {
+    padding: 5px;
+  }
+
+</style>
+
+<body>
+  <div class="main-container">
+    <div class="form-container">
+      <div class="form">
+        <input type="text" id="name" placeholder="Name" required />
+        <input type="number" id="phone" placeholder="Phone" required />
+        <input type="email" id="email" placeholder="john@example.com" required />
+        <input type="button" value="Save" id="btnSave" />
+      </div>
+    </div>
+    <div class="table-container">
+      <table id="table1">
+        <thead id="table-head">
+          <tr>
+            <th>№</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Date</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+  </div>
+  <script>
+   // start first block
+   var userData = [];
+   btnSave.onclick = function(){
+     saveData();
+   }
+
+   saveData = () => {
+     var name = document.getElementById('name').value,
+     phone = document.getElementById('phone').value,
+     email = document.getElementById('email').value,
+     dataToAdd = {
+       name: name,
+       phone: phone,
+       email: email
+     }
+     userData.push(dataToAdd);
+     console.log(userData);
+     updateTable();
+   }
+
+   updateTable = () => {
+    var dataTable = document.getElementById('table1'),
+    tableHead = document.getElementById('table-head'),
+    tableBody = document.createElement('tbody');
+
+    while (dataTable.firstChild) {
+        dataTable.removeChild(dataTable.firstChild);
+      }
+    dataTable.appendChild(tableHead);
+
+
+
+    for(var i = 0; i < userData.length; i++){
+      var tr = document.createElement('tr'),
+      td0 = document.createElement('td'),
+      td1 = document.createElement('td'),
+      td2 = document.createElement('td'),
+      td3 = document.createElement('td');
+
+      tr.appendChild(td0);
+      tr.appendChild(td1);
+      tr.appendChild(td2);
+      tr.appendChild(td3);
+
+      td0.innerHTML = i + 1;
+      td1.innerHTML = userData[i].name;
+      td2.innerHTML = userData[i].phone;
+      td3.innerHTML = userData[i].email;
+      tableBody.appendChild(tr);
+    }
+    dataTable.appendChild(tableBody);
+   }
+  
+  </script>
+</body>
+
+</html>
